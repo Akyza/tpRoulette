@@ -37,6 +37,7 @@ class ConsoleInteraction
 
         do {
             $result = $this->symfonyStyle->askQuestion($question);
+
         } while (!in_array($result, ['Oui', 'Non'], true));
 
         return $result === 'Oui';
