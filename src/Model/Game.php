@@ -46,6 +46,17 @@ class Game
         $this->consoleInteraction->gameSay(count($players) . ' joueur(s) ont rejoins la table');
         $this->consoleInteraction->gameSay('Bienvenue à ' . implode(', ', $joueurNames));
 
+        foreach ($players as $player){
+            $bet = 0;
+            do{
+                if($bet > $player->getAmount()){
+                    $this->consoleInteraction->gameSay("Vous n'avez pas assez d'argent");
+                }
+                $bet = $this->consoleInteraction->askInt($player->getName().', combien misez vous ?');
+            }while($bet > $player->getAmount());
+        }
+
+        $this->consoleInteraction->gameSay('Rien ne va plus !');
         $cases = $this->getCases();
         $finalResult = $cases[array_rand($cases, 1)];
         $this->consoleInteraction->displayWheels($finalResult, $cases);
